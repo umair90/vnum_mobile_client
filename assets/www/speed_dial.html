@@ -1,0 +1,420 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Speed Dial</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8"> 
+
+
+
+
+
+ 
+
+var pictureSource; // picture source
+
+var destinationType; // sets the format of returned value
+
+ 
+
+// Wait for PhoneGap to connect with the device
+
+//
+
+document.addEventListener("deviceready",onDeviceReady,false);
+
+ 
+
+// PhoneGap is ready to be used!
+
+//
+
+function onDeviceReady() {
+
+pictureSource=navigator.camera.PictureSourceType;
+
+destinationType=navigator.camera.DestinationType;
+
+}
+
+ 
+
+// Called when a photo is successfully retrieved
+
+//
+
+function onPhotoDataSuccess(imageData) {
+
+// Get image handle
+
+//
+
+var smallImage = document.getElementById('smallImage');
+
+ 
+
+// Unhide image elements
+
+//
+
+smallImage.style.display = 'block';
+
+ 
+
+// Show the captured photo
+
+// The inline CSS rules are used to resize the image
+
+//
+
+smallImage.src = "data:image/jpeg;base64," + imageData;
+
+}
+
+// Called when a photo is successfully retrieved
+
+//
+
+function onPhotoFileSuccess(imageData) {
+
+// Get image handle
+
+console.log(JSON.stringify(imageData));
+
+// Get image handle
+
+//
+
+var smallImage = document.getElementById('smallImage');
+
+ 
+
+// Unhide image elements
+
+//
+
+smallImage.style.display = 'block';
+
+ 
+
+// Show the captured photo
+
+// The inline CSS rules are used to resize the image
+
+//
+
+smallImage.src = imageData;
+
+}
+
+ 
+
+// Called when a photo is successfully retrieved
+
+//
+
+function onPhotoURISuccess(imageURI) {
+
+// Uncomment to view the image file URI
+
+// console.log(imageURI);
+
+ 
+
+// Get image handle
+
+//
+
+var largeImage = document.getElementById('largeImage');
+
+ 
+
+// Unhide image elements
+
+//
+
+largeImage.style.display = 'block';
+
+ 
+
+// Show the captured photo
+
+// The inline CSS rules are used to resize the image
+
+//
+
+largeImage.src = imageURI;
+
+}
+
+ 
+
+// A button will call this function
+
+//
+
+function capturePhotoWithData() {
+
+// Take picture using device camera and retrieve image as base64-encoded string
+
+navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+
+}
+
+ 
+
+function capturePhotoWithFile() {
+
+navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
+
+}
+
+// A button will call this function
+
+//
+
+function getPhoto(source) {
+
+// Retrieve image file location from specified source
+
+navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+
+destinationType: destinationType.FILE_URI,
+
+sourceType: source });
+
+}
+
+ 
+
+// Called if something bad happens.
+
+//
+
+function onFail(message) {
+
+alert('Failed because: ' + message);
+
+}
+
+
+function saveSpeedDial()
+{
+
+
+
+
+     
+	//var db = window.openDatabase("vnumber", "1.0", "VNum", 200000);
+	//db.transaction(SendTable, errorCT);
+navigator.app.loadUrl('file:///android_asset/www/Contact_View.html');
+
+}
+
+
+
+function dialer(){
+
+
+navigator.app.loadUrl('tel:');
+}
+
+
+
+
+function opencontact() 
+{
+
+window.location.replace("Contacts.html");
+//document.getElementById("frame1").src="Contact_View.html";
+
+}
+
+
+function opensetting()
+{
+
+window.location.replace("settings.html");
+//document.getElementById("frame1").src="settings.html";
+
+}
+
+
+
+function openblock()
+{
+window.location.replace("block.html");
+
+}
+
+
+function opengroups()
+{
+window.location.replace("Groups.html");
+
+}
+
+
+function opensms()
+{
+window.location.replace("sms_manager.html");
+
+
+}
+
+
+function opencalllog()
+{
+window.location.replace("call_log.html");
+
+}
+
+
+
+
+function hide_menu2(id)
+{
+  document.getElementById(id).style.display = "none";    
+  document.getElementById("hide1").style.display = "none";
+  document.getElementById("hide2").style.display = "block";      
+   
+   
+
+}
+
+function show_menu2(id)
+{
+    document.getElementById(id).style.display = "block";
+    document.getElementById("hide2").style.display = "none";  
+    document.getElementById("hide1").style.display = "block";     
+
+}
+
+
+
+
+</script>
+
+<div style="position: absolute; left:10px; right:20px; top:6px " > 
+<img src="pictures/home-icon.png" alt=""  width="30px" height="30px" value=""/>
+</div>
+
+
+
+<div style="position: absolute; left:90px; right:0px; top:8px; color:#00FFFF " >
+<label id="Tittle"><font size="4" style="color:white">Speed Dialing</font></label>
+</div>
+
+
+<div style="position: absolute; left:10px; right:20px; top:170px " > 
+<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+</div>
+
+
+<div style="position: absolute; left:25px; right:0px; top:275px" >
+<form name="list">
+<select name="groupName" style="width:265px;background:url('white-row-bg2.png')" >
+  <option>Speed dial at No. 1</option>
+  <option>Speed dial at No. 2</option>
+  <option>Speed dial at No. 3</option>
+  <option>Speed dial at No. 4</option>
+  <option>Speed dial at No. 5</option>
+  <option>Speed dial at No. 6</option>
+  <option>Speed dial at No. 7</option>
+  <option>Speed dial at No. 8</option>
+  <option>Speed dial at No. 9</option>
+  
+</select>
+</form>
+</div>
+
+<div style="position: absolute; left:155px; right:0px; top:305px ">
+<input type="submit" class="contacttick" onclick="saveSpeedDial()" name="SaveContact" value="Save" />
+</div>
+
+
+
+
+
+<!----------------------Drop Down Bar Code ------------------------------->
+
+
+
+<div style="position: absolute; left:-5px;  top:92% " id="hide2"> 
+
+<input type="submit" class="footer1" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A');" />
+
+</div>
+
+
+
+<!--<div style="position: absolute; left:0px;  top:10px " > <!--  Big Div here  -->
+
+
+<div style="position: absolute; left:-5px;  top:65%; display:none " id="hide1" > 
+
+
+<input type="submit" class="footer2" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A'); " />
+
+
+</div>
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:72%; display:none" id="id3A" >
+<input type="submit" class="testbutton1" name="Dialer" value="Dialer" onclick="dialer()"  style = " text-align:center"/>
+</div>
+
+
+
+
+<div style="position: absolute; left:107px; right:0px; top:72%; display:none" id="id4A" >
+
+<input type="submit" class="testbutton2" name="Contacts" value="Contacts" onclick="opencontact()" style = " text-align:center" />
+
+</div>
+
+
+
+<div style="position: absolute; left:214px; right:0px; top:72%; display:none" id="id5A" >
+
+<input type="submit" class="testbutton3" name="Groups" value="Groups"  onclick="opengroups()" style = "text-align:center" />
+
+</div>
+
+<div style="position: absolute; left:0px; right:0px; top:81%; display:none"  id="id6A" >
+
+<input type="submit" class="testbutton4" name="SMS" value="SMS" size="1"  onclick="opensms()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:107px; right:0px; top:81%; display:none" id="id7A" >
+
+<input type="submit" class="testbutton5" name="Calllog" value="Call Log" size="1" onclick="opencalllog()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:214px; right:0px; top:81%; display:none" id="id1A" >
+
+<input type="submit" class="testbutton6" name="Block" value="Block" size="1" onclick="openblock()" style = " text-align:center" />
+
+</div>
+
+
+<div style="position: absolute; left:0px; right:0px; top:90%; display:none" id="id2A"  >
+ <input type ="submit" class = "testbutton" name = "Settings" value = "Settings" onclick="opensetting()" style = " text-align:center" "/> 
+
+</div>
+
+
+<!--</div> <!-- Big Div End here -->
+
+
+
+
+
+
+</body>
+</html> 

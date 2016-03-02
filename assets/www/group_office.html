@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Office Contacts</title>
+<link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+<script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+<script type="text/javascript" src="iscroll.js"></script>
+
+<script type="text/javascript">
+var Name=new Array();
+var Contact=new Array();
+var FirstValue=new Array();
+var FinalTable=new Array();
+var loopeR=0;
+
+
+var myScroll,
+	hoverClassRegEx = new RegExp('(^|\\s)iScrollHover(\\s|$)'),
+	removeClass = function () {
+		if (this.hoverTarget) {
+			clearTimeout(this.hoverTimeout);
+			this.hoverTarget.className = this.hoverTarget.className.replace(hoverClassRegEx, '');
+			this.target = null;
+		}
+	};
+
+function loaded() {
+	myScroll = new iScroll('wrapper', {
+		onBeforeScrollStart: function (e) {
+			var target = e.target;
+
+			clearTimeout(this.hoverTimeout);
+
+			while (target.nodeType != 1) target = target.parentNode;
+
+			this.hoverTimeout = setTimeout(function () {
+				if (!hoverClassRegEx.test(target.className)) target.className = target.className ? target.className + ' iScrollHover' : 'iScrollHover';
+			}, 80);
+
+			this.hoverTarget = target;
+			
+			e.preventDefault();
+		},
+		onScrollMove: removeClass,
+		onBeforeScrollEnd: removeClass
+	});
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+document.addEventListener('DOMContentLoaded', loaded, false);
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	console.error("Cordova Device Ready");
+        var db = window.openDatabase("vnumber", "1.0", "VNum", 200000);
+	db.transaction(queryDB, errorCT);
+	    }
+function queryDB(tx) {
+	tx.executeSql('SELECT * FROM Contacts where grp="300"  ', [], querySuccess, errorCT);
+    }
+
+
+function querySuccess(tx, results) {
+	var len = results.rows.length
+	console.error("Returned rows = " + len);
+
+
+	
+      
+
+	for (var i=0; i<len; i++){
+	console.log ("Row = " + i + " ID = " + results.rows.item(i).id + " virt_no " + results.rows.item(i).virt_no + " cell_no " + 		  results.rows.item(i).cell_no + " c_name " + results.rows.item(i).c_name + " dt " + results.rows.item(i).dt+ " group " + 		results.rows.item(i).grp) 
+        
+        Name[i]=results.rows.item(i).c_name;
+       
+	} 
+
+	for (var i=0; i<Name.length; i++){
+	Name.sort(charOrdA);
+	Contact[i] = Name[i];
+	}
+	   
+         
+	
+
+
+	for (var i=0; i<Contact.length; i++) 
+	{
+	var startName =Contact[i].substring(0,1);
+	FirstValue[i]= startName;
+	FirstValue[i]=FirstValue[i].toUpperCase();
+	FirstValue.sort(charOrdA);
+	console.log("sorttt"+FirstValue[i]);
+	}	
+ 
+	function charOrdA(a, b){
+	a = a.toLowerCase(); b = b.toLowerCase();
+	if (a>b) return 1;
+	if (a <b) return -1;
+	return 0; }	
+
+
+	for (var i=0; i<Contact.length; i++){ 
+	  if(i>0){
+				if(Contact[i].substring(0,1).toUpperCase()==FirstValue[i] && Contact[i].substring(0,1).toUpperCase()==FirstValue[i-1]){
+					loopeR=loopeR+1;
+					FinalTable[loopeR]=Contact[i];
+					addRow("ExtTable",FinalTable[loopeR]);
+				   }
+				if(Contact[i].substring(0,1).toUpperCase()==FirstValue[i] && Contact[i].substring(0,1).toUpperCase()!=FirstValue[i-1]){
+					loopeR=loopeR+1;
+					FinalTable[loopeR]=FirstValue[i];
+					addRowTag("ExtTable",FinalTable[loopeR]); 
+					loopeR=loopeR+1;
+					FinalTable[loopeR]=Contact[i];	
+					  //adding tag
+					addRow("ExtTable",FinalTable[loopeR]);
+				   }
+			}
+		
+	else if(i<1){	FinalTable[loopeR]=FirstValue[i];
+			addRowTag("ExtTable",FinalTable[loopeR]);  
+			loopeR=i+1;
+			FinalTable[loopeR]=Contact[i];
+			      //adding tag
+			addRow("ExtTable",FinalTable[loopeR]);		
+			
+		    }		
+
+	     }
+
+   } // querySucess ends 
+
+
+/*
+function querySuccess(tx, results) {
+	var len = results.rows.length
+	console.error("Returned rows = " + len);
+
+
+	
+      
+
+	for (var i=0; i<len; i++){
+	console.log ("Row = " + i + " ID = " + results.rows.item(i).id + " virt_no " + results.rows.item(i).virt_no + " cell_no " + results.rows.item(i).cell_no + " c_name " + results.rows.item(i).c_name + " dt " + results.rows.item(i).dt) 
+        
+        addRow("ExtTable",results.rows.item(i).c_name);
+	    
+
+      
+	}
+   }
+*/
+function errorCT(err) {
+     	console.error("Error processing SQL: "+err.code);
+}
+
+function insertItem(myid,position,newListItem) {
+var ul = document.getElementById(myid);
+var li = document.createElement("li");
+li.innerHTML=newListItem;
+ul.insertBefore(li, ul.getElementsByTagName("li")[position]);
+}
+
+function Search()
+{  	
+         var SearchText=document.getElementById('searchtxt').value;
+		        console.log("Searchhhhhhhhhhhhh")
+			console.log(SearchText);
+
+		if (Name.length > 0 && SearchText.length > 0) {
+		console.log("here1");
+			console.log("Value of Name"+Name.length)
+				for(var j=0;j<Name.length;j++){
+				console.log("here2");
+				if (Name[j].toLowerCase().startsWith(SearchText.toLowerCase()))
+				{
+				console.log("here3");
+				
+			//	addRow("ExtTable",Name[j],Department[j],Extension[j]);				
+					
+				}
+
+				else{
+
+				
+				deleteRow("ExtTable",Name[j]);
+				
+				console.log("control in else block"+j);
+				}				
+				
+
+
+
+			}
+			
+		} else {
+                         console.log("here4");
+			
+		
+		}
+	
+
+}
+
+String.prototype.startsWith = function(prefix) {
+    return this.indexOf(prefix) === 0;
+}
+
+
+
+
+function addRow(tableID,Name) {
+ 
+            var table = document.getElementById(tableID);
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML= Name
+            
+     
+ 		addRowHandlers(row);
+        }
+
+
+	function addRowHandlers(row) {
+    
+        row.onclick = function(myrow){
+                          return function() { 
+                             var cell = myrow.getElementsByTagName("td")[0];
+                             var id = cell.innerHTML;
+                             getContact(id)
+			     
+                      };
+                  }(row);
+    
+}
+
+ 
+        function deleteRow(tableID,Name) {
+            
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var content=document.getElementsByTagName('td');
+        	 for(var i=0; i<rowCount; i++) {
+			var row=table.rows[i];
+			//console.log("value of row"+row)
+			console.log("value of row*****"+row.cells[0].innerHTML)
+		      if(Name==row.cells[0].innerHTML)
+			{
+                   	 table.deleteRow(i);
+                    	//rowCount--;
+                   	// i--;
+			break;
+			}
+			//else{break;}
+	}
+                
+        }
+
+
+///////////////////////////////////////////////////////////////////////////  tag in a row
+
+function addRowTag(tableID,Name) {
+ 
+            var table = document.getElementById(tableID);
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML= Name;
+
+	    table.getElementsByTagName("tr");
+	    row.style.backgroundImage="url('pictures/skin-row-bg.png')";
+	//////////////
+
+	    
+          
+ 
+
+
+
+
+//////////////	
+	
+            
+     
+ 		
+        }
+
+
+
+
+function getContact(con)
+{
+			
+window.localStorage.removeItem("ContactView");
+window.localStorage.removeItem("Contact");
+window.localStorage.setItem("ContactView", "Details");
+window.localStorage.setItem("Contact", con);
+navigator.app.loadUrl('file:///android_asset/www/Contact_View.html');
+	
+}
+
+
+function addContact(){
+
+window.localStorage.removeItem("ContactView");
+window.localStorage.removeItem("Contact");
+window.localStorage.setItem("ContactView", "Add");
+navigator.app.loadUrl('file:///android_asset/www/Contact_View.html');
+
+}
+
+function editContact(){
+
+var cellno =document.getElementById('search').value;
+ cordova.exec(contSuccess, contError, "Contact", "edit", [cellno]);
+}
+
+function deleteContact(){
+var cellno  =document.getElementById('search').value;
+cordova.exec(contSuccess, contError, "Contact", "delete", [cellno]);
+}
+
+function contSuccess(){
+console.error("contact Success")
+
+}
+
+function contError(){
+console.error("contact Error")
+}
+
+function sms(){
+
+navigator.app.loadUrl('file:///android_asset/www/sms_manager.html');
+
+}
+
+function dialer(){
+
+
+navigator.app.loadUrl('tel:');
+}
+
+
+function opencontact() 
+{
+
+window.location.replace("Contacts.html");
+//document.getElementById("frame1").src="Contact_View.html";
+
+}
+
+
+function opensetting()
+{
+
+window.location.replace("settings.html");
+//document.getElementById("frame1").src="settings.html";
+
+}
+
+
+
+function openblock()
+{
+window.location.replace("block.html");
+
+}
+
+
+function opengroups()
+{
+window.location.replace("Groups.html");
+
+}
+
+
+function opensms()
+{
+window.location.replace("sms_manager.html");
+
+
+}
+
+
+function opencalllog()
+{
+window.location.replace("call_log.html");
+
+}
+
+
+
+
+function hide_menu2(id)
+{
+
+  document.getElementById(id).style.display = "none";    
+  document.getElementById("hide1").style.display = "none";
+  document.getElementById("hide2").style.display = "block";      
+   
+   
+
+}
+
+function show_menu2(id)
+{
+    document.getElementById(id).style.display = "block";
+    document.getElementById("hide2").style.display = "none";  
+    document.getElementById("hide1").style.display = "block";     
+
+}
+
+
+
+</script>
+
+<style type="text/css" media="all">
+.iScrollHover {
+	background:#444 !important;
+	color:#eee !important;
+}
+
+body,ul,li {
+	padding:0;
+	margin:0;
+	border:0;
+}
+
+body {
+	font-size:12px;
+	-webkit-user-select:none;
+    -webkit-text-size-adjust:none;
+	font-family:helvetica;
+}
+
+
+
+#wrapper {
+	position:absolute; z-index:1;
+	top:95px; bottom:140px; left:0;
+	width:93%;
+	height:68%;
+	background:url('pictures/skin-bg.png');
+	overflow:auto;
+}
+
+#scroller {
+	position:absolute; z-index:1;
+/*	-webkit-touch-callout:none;*/
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	width:100%;
+	padding:0;
+}
+
+#scroller table {
+	list-style:none;
+	padding:0;
+	margin:0;
+	width:100%;
+	text-align:left;
+}
+
+#scroller tr {
+	padding:0 10px;
+	height:40px;
+	line-height:40px;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #fff;
+	background-color:#fff;
+	font-size:14px;
+	color:black;
+}
+
+#myFrame {
+	position:absolute;
+	top:0; left:0;
+}
+
+</style>
+</head>
+
+<div style="position: absolute; left:0px; right:0px; top:0px; z-index:-2;" > 
+
+<img src="pictures/bg.png" alt=""  width="115%" value=""/>
+
+</div>
+
+<div style="position: absolute; left:10px; right:20px; top:6px " > 
+<img src="pictures/home-icon.png" alt=""  width="30px" height="30px" value=""/>
+</div>
+
+
+
+<div style="position: absolute; left:100px; right:0px; top:8px " >
+<label id="callernum"><font size="5" color="white">All Contacts</font></label>
+</div>
+
+<div style="position: absolute; left:5px;  top:48px " > 
+<img src="pictures/input-bg.png" alt=""  width="300px" height="40px" value=""/>
+</div>
+
+
+
+
+<div style="position: absolute; top:60px; left:10px" >
+<form> 
+	<input type="text" class="searchBox1" name="no" id="no"/>
+</form> 
+</div>
+
+
+<div style="position: absolute; left:270px; right:0px; top:50px " > 
+<img src="pictures/blue-line.png" style="width:2px;height:39px"/>
+</div>
+
+
+
+
+<div style="position: absolute; top:55px; left:275px" >
+<input class="plusicon" type="submit" value="" onclick="addContact()"/>
+</div>
+
+
+<div style="position: absolute; top:55px; left:235px" >
+<FORM METHOD="LINK" ACTION="">
+<td><input class="searchicon" type="submit" value=""/></td>
+</FORM>
+</div>
+
+
+
+
+
+
+
+<div id="wrapper" style="position: absolute;left:8px ;top:95px ; z-index:1;">
+	<div id="scroller">
+		<table border="0" width="320" id="ExtTable" >
+  		</table>
+	</div>
+</div>
+
+
+
+
+
+
+<!----------------------Drop Down Bar Code ------------------------------->
+
+
+
+<div style="position: absolute; left:-5px;  top:92% " id="hide2"> 
+
+<input type="submit" class="footer1" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A');" />
+
+</div>
+
+
+
+<!--<div style="position: absolute; left:0px;  top:10px " > <!--  Big Div here  -->
+
+
+<div style="position: absolute; left:-5px;  top:65%; display:none ; z-index:2;" id="hide1" > 
+
+
+<input type="submit" class="footer2" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A'); " />
+
+
+</div>
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:72%; display:none; z-index:2;" id="id3A" >
+<input type="submit" class="testbutton1" name="Dialer" value="Dialer" onclick="dialer()"  style = " text-align:center"/>
+</div>
+
+
+
+
+<div style="position: absolute; left:107px; right:0px; top:72%; display:none; z-index:2;" id="id4A" >
+
+<input type="submit" class="testbutton2" name="Contacts" value="Contacts" onclick="opencontact()" style = " text-align:center" />
+
+</div>
+
+
+
+<div style="position: absolute; left:214px; right:0px; top:72%; display:none; z-index:2;" id="id5A" >
+
+<input type="submit" class="testbutton3" name="Groups" value="Groups"  onclick="opengroups()" style = "text-align:center" />
+
+</div>
+
+<div style="position: absolute; left:0px; right:0px; top:81%; display:none; z-index:2;"  id="id6A" >
+
+<input type="submit" class="testbutton4" name="SMS" value="SMS" size="1"  onclick="opensms()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:107px; right:0px; top:81%; display:none; z-index:2;" id="id7A" >
+
+<input type="submit" class="testbutton5" name="Calllog" value="Call Log" size="1" onclick="opencalllog()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:214px; right:0px; top:81%; display:none; z-index:2;" id="id1A" >
+
+<input type="submit" class="testbutton6" name="Block" value="Block" size="1" onclick="openblock()" style = " text-align:center" />
+
+</div>
+
+
+<div style="position: absolute; left:0px; right:0px; top:90%; display:none" id="id2A"  >
+ <input type ="submit" class = "testbutton" name = "Settings" value = "Settings" onclick="opensetting()" style = " text-align:center" "/> 
+
+</div>
+
+
+</body>
+</html>
+

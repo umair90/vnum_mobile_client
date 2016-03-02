@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>PhoneGap</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8">
+
+var callerNum;
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	console.error("Cordova Device Ready");
+	cordova.exec(getCallerSuc,  getCallerErr,  "Connection", "getCallerNo", []);
+       
+	    }
+
+function getCallerSuc(callernum){
+callerNum = callernum;
+//alert("calling Number is " + callernum)
+var cNum=document.getElementById('callernum')
+cNum.innerHTML = callerNum;
+}
+
+function getCallerErr(callernum){
+
+}
+
+function sendResponse(action){
+
+console.error("Button Clicked "+ action)
+cordova.exec(sendResponseSuccess, sendResponseError, "SendCallResp", action, []);
+}
+
+function sendResponseError(){
+
+console.error("Send Response Error")
+}
+
+function sendResponseSuccess(){
+
+console.error("Send Response Success")
+}
+
+</script>
+
+  </head>
+
+<div style="position: absolute; left:0px; right:0px; top:0px " >
+<img src="pictures/Status.png" alt="Pulpit rock"  width="320" height="15px" />
+<label id="callernum"></label>
+<script>
+//document.getElementById('callernum').innerHTML=callerNum;
+</script>
+<div style="position: absolute; left:20px; right:0px; top:50px " >
+<td><input class="submit5" onclick="sendResponse('Accept')" type="button" value="Accept" /></td>
+<td><input class="submit6" onclick="sendResponse('Reject')" type="button" value="Reject" /></td>
+<td><input class="submit7" onclick="sendResponse('Silent')" type="button" value="Silent" /></td>
+
+
+<div style="position: absolute; left:-15px; right:0px; top:90px " >
+<td><input class="submit10" onclick="sendResponse('NextExten')" type="button" /></td>
+<td><input class="submit11" onclick="sendResponse('VM')" type="button" /></td>
+<td><input class="submit12" onclick="sendResponse('FWDOP')" type="button"  /></td>
+<FORM METHOD="LINK" ACTION="Call_back.html">
+<td><input class="submit13" onclick="" type="submit" value="" /></td>
+</FORM>
+
+
+<div style="position: absolute; left:-5px; right:0px; top:260px">
+<img src="pictures/Menubar.png" alt="Pulpit rock"  width="320" height="50px" />
+
+<div style="position: absolute; left:25px; right:0px; top:0px " >
+<FORM METHOD="LINK" ACTION="Dialer.html">
+<td><input class="submit28" onclick="" type="submit" value=" " /></td>
+</FORM>
+
+<div style="position: absolute; left:110px; right:0px; top:0px " >
+<FORM METHOD="LINK" ACTION="EXT_Board.html">
+<td><input class="submit29" onclick="" type="submit" value=" " /></td>
+</FORM>
+
+<div style="position: absolute; left:100px; right:0px; top:0px " >
+<FORM METHOD="LINK" ACTION="Change_Password.html">
+<td><input class="submit30" onclick="" type="submit" value=" "/></td>
+</FORM>
+
+
+
+
+</body>
+</html> 

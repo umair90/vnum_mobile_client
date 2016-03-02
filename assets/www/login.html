@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Login</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8"> 
+ 
+
+
+var sender="03455321315";
+var receiver="0333532131";
+var msg="This is My sent Message, please call me asap";
+var msg1="This is My recv Message, please call me asap";
+var sent="1";
+var read="1";
+//var date="1990-02-07 04:30:45";
+//var number="0900785601";
+//var type="missed";
+
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	console.error("Cordova Device Ready");
+        var db = window.openDatabase("vnumber", "1.0", "VNum", 200000);
+	db.transaction(ContactTable, errorCT);
+	db.transaction(SendTable, errorCT);
+	db.transaction(RecvTable, errorCT);
+	db.transaction(CallLog, errorCT);
+	
+	    }
+
+function Connect(){
+var number=document.getElementById('no').value;
+var password=document.getElementById('pass').value;
+
+cordova.exec(connSuccess, connError, "Connection", "connect", [number,password]);
+}
+
+function connError(){
+       console.error("connError")
+}
+
+function connSuccess(){
+
+	cordova.exec(callSuccess, callError, "Contact", "getCallLog", []);
+
+
+       console.log("connSuccess")
+       window.location.href = "file:///android_asset/www/Contacts.html";
+}
+
+function callSuccess(){
+console.log("CallLog sucess");
+}
+
+
+function callError(){
+console.log("CallLog error");
+}
+
+
+
+
+function ContactTable(tx){
+	tx.executeSql("DROP TABLE IF EXISTS Contacts");
+	tx.executeSql('CREATE TABLE IF NOT EXISTS Contacts (id INTEGER PRIMARY KEY, virt_no, cell_no, c_name, dt, grp, name_file,' 
+			+'grp_blocked, cell_no2, email, start_time, end_time, grp_blocked_start_time,'+
+			 'grp_blocked_end_time)');
+        
+}
+
+function SendTable(tx){
+	tx.executeSql("DROP TABLE IF EXISTS sendsms");
+	tx.executeSql('CREATE TABLE IF NOT EXISTS sendsms (id INTEGER PRIMARY KEY,sender,receiver,msg,time)');
+        console.log("sendTable success");
+
+}
+
+function RecvTable(tx){
+	tx.executeSql("DROP TABLE IF EXISTS receivesms");
+	tx.executeSql('CREATE TABLE IF NOT EXISTS receivesms (id INTEGER PRIMARY KEY,sender,receiver,msg,time)');
+        console.log("recevTable success");
+		
+
+}
+
+
+function CallLog(tx){
+	tx.executeSql("DROP TABLE IF EXISTS call_log");
+	tx.executeSql('CREATE TABLE IF NOT EXISTS call_log (id INTEGER PRIMARY KEY,date,number,type)');
+        console.log("callTable success");
+	//tx.executeSql("INSERT into call_log (date,number,type) VALUES ('"+date+"','"+number+"','"+type+"')", [], callSuccess, errorCT);	
+
+}
+
+
+function sendSuccess() {
+console.log("inserted successfuly");
+}
+
+function recvSuccess() {
+console.log("inserted successfuly");
+}
+
+function callSuccess() {
+console.log("call log success");
+}
+
+
+function errorCT(err) {
+     	console.error("Error processing SQL: "+err.code);
+}
+
+function changetype(pass)
+{
+pass.value='';
+pass.type='password';
+}
+
+
+</script>
+
+</head>
+
+
+<div style="position: absolute; left:60px; right:0px; top:110 ">
+<img src="pictures/logo.png" alt="Pulpit rock" width="200" height="100" />
+</div>
+
+<!--
+<div style="position: absolute; left:50px; right:0px; top:227px ">
+<img src="pictures/input-bg.png" alt="Pulpit rock" width="200" height="40"  />
+</div>  -->
+
+<div style="position: absolute; left:60px; right:0px; top:230px  ">
+<form> 
+	<input type="text" class="searchBox" name="no" id="no" style="background-color:transparent;" />
+</form> 
+</div>
+
+
+<div style="position: absolute; left:60px; right:0px; top:280px ">
+<form> 
+  	 <input type="text" class="searchBox" name="pass" id="pass" onclick="changetype(this)" style="background-color:transparent"  /><br />
+</form> 
+</div>
+
+
+
+<div style="position: absolute; left:55px; right:0px; top:330 ">
+<td><input class="submitbtn"  type="submit" onclick="Connect()" value="           Login           "  />   </td>
+</div>
+
+
+
+</html> 

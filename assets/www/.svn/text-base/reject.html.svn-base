@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>PhoneGapLogin</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8"> 
+ 
+function callback(){
+navigator.app.loadUrl('file:///android_asset/www/Call_back.html');
+}
+
+
+
+</script>
+<div style="position: absolute; left:65px; right:0px; top:125px ">
+<input type="submit" class="bigorange" name="DeleteContact" value="Reject"  />
+</div>
+
+
+<div style="position: absolute; left:250px; right:0px; top:125px ">
+<input type="submit" class="bigorange"  name="DeleteContact" value="Reject and 
+Divert to 
+voicemail"  />
+</div>
+ 
+<div style="position: absolute; left:65px; right:0px; top:220px ">
+<input type="submit" class="bigorange"  name="DeleteContact" value="Reject and 
+Divert to 
+opreator" />
+</div>
+
+
+
+<div style="position: absolute; left:160px; right:0px; top:220px ">
+<input type="submit" class="bigorange"  name="DeleteContact" value="Reject and 
+Call back" onclick="callback()"  />
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html> 

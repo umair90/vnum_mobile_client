@@ -1,0 +1,58 @@
+10
+
+dir
+568
+svn://192.168.10.15/vnum/vnum_mobile_client_v2/res
+svn://192.168.10.15/vnum
+
+
+
+2012-12-13T15:17:53.865461Z
+564
+hyyan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+abfe06de-6daf-45ad-a607-c484a382d41f
+
+values
+dir
+
+xml
+dir
+
+drawable-hdpi
+dir
+
+menu
+dir
+
+values-v11
+dir
+
+drawable-ldpi
+dir
+
+values-v14
+dir
+
+drawable-mdpi
+dir
+
+drawable-xhdpi
+dir
+
+layout
+dir
+

@@ -1,0 +1,566 @@
+<html>
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" type="text/css" href="css/style.css"/>
+   <script type="text/javascript" language="javascript" src="jquery/jquery.js"></script>
+   <script type="text/javascript" src="js/jquery-calendar.js"></script>
+   <link rel="stylesheet" type="text/css" href="js/jquery-calendar.css" />
+
+
+   <meta http-equiv="Content-Type" content="text/html;">
+   <script language="javaScript" type="text/javascript" src="calendar.js"></script>
+   <link href="calendar.css" rel="stylesheet" type="text/css">
+
+
+
+<style>
+
+
+skin {background:url('pictures/skin-bg.png')}
+
+</style>
+
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>New Message</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8"> 
+ 
+
+
+$(document).ready(function (){ 
+	$("#calendar1, #calendar2").calendar();
+	$("#calendar1_alert").click(function(){alert(popUpCal.parseDate($('#calendar1').val()))});
+});
+
+
+
+ var MessageID=window.localStorage.getItem("ForwardmsgID");
+
+var sender="100";
+var receiver;
+var msg;
+var sent="1";
+var date;
+var time;
+var dt;
+
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	console.error("Cordova Device Ready");
+        var db = window.openDatabase("vnumber", "1.0", "VNum", 200000);
+		
+		db.transaction(getReceiverName, errorCT);
+       
+		if(window.localStorage.getItem("Reply")==100){
+		window.localStorage.removeItem("Reply");
+		document.getElementById("to").value=window.localStorage.getItem("ReplyNo");
+		window.localStorage.removeItem("ReplyNo");
+	
+		}
+
+		if(window.localStorage.getItem("Forward")==100){
+       		 window.localStorage.removeItem("Forward");
+		
+		window.localStorage.removeItem("ForwardmsgID");
+		var Messagetype=window.localStorage.getItem("MsgType");
+		window.localStorage.removeItem("MsgType");
+
+		if(Messagetype==0){
+
+			var db = window.openDatabase("vnumber", "1.0", "VNum", 200000); 
+			db.transaction(recvDB, errorCT);
+				}
+
+		if(Messagetype==1){
+
+			var db = window.openDatabase("vnumber", "1.0", "VNum", 200000); 
+			db.transaction(sentDB, errorCT);
+
+				}
+
+
+		
+	
+		} //forward ends
+
+
+	
+	    }
+
+
+
+function sentDB(tx) {
+	tx.executeSql("SELECT * FROM sendsms where id="+MessageID, [], querySuccess1, errorCT);
+    }
+
+
+function recvDB(tx) {
+	tx.executeSql("SELECT * FROM receivesms where id="+MessageID, [], querySuccess1, errorCT);
+    }
+
+
+
+function querySuccess1(tx, results) {
+	var len = results.rows.length
+	console.error("Returned rows = " + len);
+	for (var i=0; i<len; i++){
+	console.log ("Row = " + i + " ID = " + results.rows.item(i).id + " sender" + results.rows.item(i).sender + " receiver" + results.rows.item(i).receiver + " Name" + results.rows.item(i).msg + " sent" + results.rows.item(i).read) 
+     //   results.rows.item(i).id;
+      //  results.rows.item(i).sender;
+       // results.rows.item(i).receiver;
+      //  msg=results.rows.item(i).msg;
+     //   addRow("ExtTable",sender,msg,id);
+	
+        document.getElementById("sms").value=results.rows.item(i).msg;
+         
+
+      
+	}
+   }
+
+
+
+
+function send()
+{
+
+
+     
+     msg=document.getElementById("sms").value;
+     receiver=document.getElementById("to").value;
+     if(document.getElementById("includesig").checked==true){
+	msg=msg+document.getElementById("sign").value;
+
+	}
+	 var db = window.openDatabase("vnumber", "1.0", "VNum", 200000);
+	db.transaction(SendTable, errorCT);
+
+}
+
+
+function SendTable(tx){
+	
+
+        console.log("sendTable success");
+        tx.executeSql("INSERT into sendsms (sender,receiver,msg,sent) VALUES ('"+sender+"','"+receiver+"','"+msg+"','"+sent+"')", [], logDB, errorCT);
+}
+
+
+function sendSuccess() {
+console.log("inserted successfuly");
+}
+
+
+
+function logDB(tx,results) {
+	var insertId = results.insertId;
+	console.log(" Inserted ID "+ insertId);
+
+		if(document.getElementById("sendNow").checked==true){
+		console.log("Plungin Going to Call for SendNow");
+		cordova.exec(sendsmsSucces, sendsmsError, "Contact", "sendSms", [insertId]);
+		}
+
+		if(document.getElementById("sendAt").checked==true){
+		 dt=document.getElementById("calendar1").value;
+		 console.log("date"+dt);
+                 console.log("Plungin Going to Call for Later");
+		cordova.exec(sendsmsSucces, sendsmsError, "Contact", "sendSmsSchedule", [insertId,dt]);
+		}
+	
+  
+
+  }
+
+function sendsmsSucces() {
+console.log("Send sms successfuly");
+}
+
+function sendsmsError() {
+console.log("Sendsms successfuly");
+}
+
+function querySuccess(tx, results) {
+	var len = results.rows.length
+	console.error("Returned rows = " + len);
+	for (var i=0; i<len; i++){
+	console.log ("Row = " + i + " ID = " + results.rows.item(i).id + " sender" + results.rows.item(i).sender + " receiver" + results.rows.item(i).receiver + " Name" + results.rows.item(i).msg + " sent" + results.rows.item(i).read) 
+        id=results.rows.item(i).id;
+        sender=results.rows.item(i).sender;
+        receiver=results.rows.item(i).receiver;
+        msg=results.rows.item(i).msg;
+
+       
+	
+        
+       }
+ }
+
+
+
+
+
+function errorCT(err) {
+     	console.error("Error processing SQL: "+err.code);
+}
+
+
+
+function sms(){
+
+navigator.app.loadUrl('file:///android_asset/www/sms_manager.html');
+
+}
+
+function dialer(){
+
+
+navigator.app.loadUrl('tel:');
+}
+
+
+
+function opencontact() 
+{
+
+window.location.replace("Contacts.html");
+//document.getElementById("frame1").src="Contact_View.html";
+
+}
+
+
+function opensetting()
+{
+
+window.location.replace("settings.html");
+//document.getElementById("frame1").src="settings.html";h
+
+}
+
+
+
+function openblock()
+{
+window.location.replace("block.html");
+
+}
+
+
+function opengroups()
+{
+window.location.replace("Groups.html");
+
+}
+
+
+function opensms()
+{
+window.location.replace("sms_manager.html");
+
+
+}
+
+
+function opencalllog()
+{
+window.location.replace("call_log.html");
+
+}
+
+
+
+function hide_menu2(id)
+{
+  document.getElementById(id).style.display = "none";    
+  document.getElementById("hide1").style.display = "none";
+  document.getElementById("hide2").style.display = "block";      
+   
+   
+
+}
+
+function show_menu2(id)
+{
+    document.getElementById(id).style.display = "block";
+    document.getElementById("hide2").style.display = "none";  
+    document.getElementById("hide1").style.display = "block";     
+
+}
+
+
+function enable()
+{
+
+
+if(document.getElementById("sendNow").checked == true || document.getElementById("sendAt").checked == true )
+{
+
+  document.getElementById("subbtn").disabled=  false; 
+
+ 
+}
+
+
+
+}
+
+
+
+
+function addcontactnumber()
+{
+
+window.location.replace("Contacts_Message.html");
+//window.location="Contacts_Message.html";
+//alert("Contact Not Found");
+
+
+}
+
+
+
+function getReceiverName(tx){
+	var ToSms = window.localStorage.getItem("ToSms");
+	window.localStorage.removeItem("ToSms"); 
+	tx.executeSql("SELECT * FROM Contacts where c_name ='"+ToSms+"'", [], getReceiverNameSuccess, errorCT);
+
+
+}
+
+function getReceiverNameSuccess(tx,results){
+
+		
+	console.log ("Row = " + 0 + " ID = " + results.rows.item(0).id + " virt_no" + results.rows.item(0).virt_no + " cell_no" + results.rows.item(0).cell_no + " c_name" + results.rows.item(0).c_name); 
+                document.getElementById("to").value = results.rows.item(0).c_name;
+			
+	
+}
+
+
+</script>
+
+
+<div style="position: absolute; left:10px; right:20px; top:6px " > 
+<img src="pictures/home-icon.png" alt=""  width="30px" height="30px" value=""/>
+</div>
+
+
+
+<div style="position: absolute; left:100px; right:0px; top:8px; color:#00FFFF " >
+<label id="Tittle"><font size="4" style="color:white">New Message</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:10px;  top:48px " > 
+<img src="pictures/blue-bg.png" width="300px" height="40px" />
+</div>
+
+<div style="position: absolute; left:270px; right:0px; top:52px " >
+<input class="addcontact" type="submit" name="Add Contact" value="" onclick="addcontactnumber()"/>
+</div>
+
+
+<!--
+
+<div style="position: absolute; left:280px;  top:55px " > 
+<input type="button" class="bluecross" name="no" id="email"/>
+</div>
+-->
+
+
+
+<div style="position: absolute; top:57px; left:40px" >
+<form> 
+	<input type="text" class="searchBox2"  style="color:white" name="no" id="to" value=""/>
+</form> 
+</div>
+
+<div style="position: absolute; left:20px;  top:60px " > 
+<label> <font size="2" style="color:white">To:      </font></label>
+</div>
+
+
+
+<div style="position: absolute; left:10px; right:20px; top:95px " > 
+<img src="pictures/skin-bg.png" alt=""  width="300px" height="270px" value=""/>
+</div>
+
+
+
+<div style="position: absolute; left:20px; top:105px " > 
+<img src="pictures/white-write-msg-bg.png" alt=""  width="280px" height="200px" value=""/>
+</div>
+
+
+<div style="position: absolute; left:18px; right:0px; top:102px">
+
+<textarea rows="8" cols="39" style="background:url('pictures/white-write-msg-bg.png'); overflow:auto; border: none" id="sms">
+</textarea>
+</div>
+
+
+<div style="position: absolute; left:45px; top:263px " >
+<label id="Tittle"><font size="2">Include SMS Signature</font></label>
+</div>
+</div>
+
+<div style="position: absolute; left:20px; right:0px; top:283px">
+<input type="text" class="resizedTextbox7" name="FromMin" value="" id="sign"/>
+</div>
+
+
+
+<div style="position: absolute; left:20px; top:255px " > 
+<input type="checkbox" name="Send now" id="includesig" />
+</div>
+
+<div style="position: absolute; left:30px; right:0px; top:315px " >
+<input class="sendnow" type="submit" name="Send now" value="Send Now" />
+</div>
+
+<div style="position: absolute; left:17px; right:0px; top:328px" onclick="enable()" >
+<input type="radio" name="Send now" id="sendNow"  />
+<!--<label id="Tittle"><font size="2">Send Now</font></label> -->
+</div>
+
+<div style="position: absolute; left:120px; right:0px; top:330px " >
+<input type="radio" name="Send now" value="sendnow" id="sendAt" onclick="enable()"/>
+<label id="Tittle"><font size="2">Send At</font></label>
+<input type="text" class="resizedTextbox9" id="date" value="yyyy-mm-dd"  />
+<input type="text" class="resizedTextbox9" id="time" value="hh:mm:ss" />
+</div> 
+
+</skin>
+
+<div style="position: absolute; left:6px; right:0px; top:370px " >
+<input class="submitbtn3" type="submit" name="Send" value="  Send  " onclick="send()"  disabled='true' id="subbtn"/>
+</div>
+
+
+
+
+
+<div style="position: absolute; left:-95px; right:0px; top:195px " >
+
+
+
+		<div style="position: absolute; top:120px; left:235px" >
+      
+                <img src='pictures/orange-send-latter-btn.png'  width="160px" height="49px">
+             
+     		</div>
+
+
+
+		<div style="position: absolute; top:125px; left:150px; " >
+     
+              	 <input type="text" class="resizedTextboxCal" id="calendar1" value="" size="1" readonly="readonly">
+             
+     		</div>
+
+
+		<!--<div style="position: absolute; top:155px; left:150px; " >
+     
+              	 <input type="text" class="resizedTextboxCal" id="calendar2" value="" size="1" readonly="readonly">
+             
+     		</div>-->cal
+
+
+  </div>
+	
+                
+                        <div style="position: absolute; left:145px; right:0px; top:333px " >
+                        
+                        <label id="Tittle"><font size="2" style="color:white; font-weight:bold;">Send At</font></label>
+                         </div>
+
+
+
+
+
+
+
+
+
+<!----------------------Drop Down Bar Code ------------------------------->
+
+
+
+<div style="position: absolute; left:-5px;  top:92% " id="hide2"> 
+
+<input type="submit" class="footer1" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A');" />
+
+</div>
+
+
+
+<!--<div style="position: absolute; left:0px;  top:10px " > <!--  Big Div here  -->
+
+
+<div style="position: absolute; left:-5px;  top:65%; display:none ; z-index:1;" id="hide1" > 
+
+
+<input type="submit" class="footer2" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A'); " />
+
+
+</div>
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:72%; display:none; z-index:1;" id="id3A" >
+<input type="submit" class="testbutton1" name="Dialer" value="Dialer" onclick="dialer()"  style = " text-align:center"/>
+</div>
+
+
+
+
+<div style="position: absolute; left:107px; right:0px; top:72%; display:none; z-index:1;" id="id4A" >
+
+<input type="submit" class="testbutton2" name="Contacts" value="Contacts" onclick="opencontact()" style = " text-align:center" />
+
+</div>
+
+
+
+<div style="position: absolute; left:214px; right:0px; top:72%; display:none; z-index:1;" id="id5A" >
+
+<input type="submit" class="testbutton3" name="Groups" value="Groups"  onclick="opengroups()" style = "text-align:center" />
+
+</div>
+
+<div style="position: absolute; left:0px; right:0px; top:81%; display:none; z-index:1;"  id="id6A" >
+
+<input type="submit" class="testbutton4" name="SMS" value="SMS" size="1"  onclick="opensms()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:107px; right:0px; top:81%; display:none; z-index:1;" id="id7A" >
+
+<input type="submit" class="testbutton5" name="Calllog" value="Call Log" size="1" onclick="opencalllog()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:214px; right:0px; top:81%; display:none; z-index:1;" id="id1A" >
+
+<input type="submit" class="testbutton6" name="Block" value="Block" size="1" onclick="openblock()" style = " text-align:center" />
+
+</div>
+
+
+<div style="position: absolute; left:0px; right:0px; top:90%; display:none" id="id2A"  >
+ <input type ="submit" class = "testbutton" name = "Settings" value = "Settings" onclick="opensetting()" style = " text-align:center" "/> 
+
+</div>
+
+
+
+
+
+
+</body>
+</html> 

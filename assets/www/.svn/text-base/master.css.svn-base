@@ -1,0 +1,410 @@
+
+* {-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+
+
+
+
+.resizedTextbox1 {width: 90px; height: 30px}
+
+.resizedTextbox2 {width: 160px; height: 30px}
+
+.resizedTextbox3 {width: 245px; height: 30px}
+
+.resizedTextbox4 {width: 130px; height: 30px}
+
+.resizedTextbox5 {width: 55px; height: 30px; padding: 3px 0px;}
+
+.resizedTextbox6 {width: 90px; height: 90px}
+/*
+.resizedTextbox7, .textarea{width: 280px; height: 100px;
+text-align:justify;rep
+background-color:transparent;
+border:0px}
+*/
+
+.resizedTextbox7 {width: 280px; height: 20px;
+background-color:transparent;border:0px
+}
+
+
+.resizedTextbox8 {width: 300px; height: 60px}
+
+.resizedTextbox9 {width: 50px; height: 20px}
+
+
+.resizedTextbox {width: 200px; height: 36px}
+
+.resizedTextboxA {width: 310px; height: 40px}
+      
+
+.loginimg, .button { text-align : center; height: 30px;width: 80px; background: url('pictures/input-bg.png') 0 0 repeat-x;background-size:293px 54px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.searchBox{
+background-image:url('pictures/input-bg.png') ;
+border: 0px solid #6297BC;
+background-repeat:no-repeat;
+padding-left:0px;
+height:40px;
+width:200px;
+}
+
+
+.searchBox1{
+border: 0px solid #6297BC;
+background-repeat:no-repeat;
+padding-left:0px;
+background-color:transparent;
+width:220px;
+}
+
+
+.searchBox2{
+border: 0px solid #6297BC;
+background-repeat:no-repeat;
+padding-left:0px;
+background-color:transparent;
+width:235px;
+}
+
+.searchBox3{
+border: 0px solid #6297BC;
+background-repeat:no-repeat;
+padding-left:0px;
+background-color:transparent;
+width:290px;
+}
+
+.searchBox4{
+border: 0px solid #6297BC;
+background-repeat:no-repeat;
+padding-left:0px;
+font-size:10px;
+background-color:transparent;
+width:130px;
+}
+
+.searchBox5{
+border: 0px solid #6297BC;
+background-repeat:no-repeat;
+padding-left:0px;
+font-size:10px;
+background-color:transparent;
+width:210px;
+}
+
+
+
+.testbutton
+      {
+float:left;
+margin-left: 0px;
+height:50px;
+width:320px;
+line-height: 22px;
+text-align:left;
+background:url('pictures/settings-icon.png')0 0 repeat-x;background-size:100%;
+background-color:#fbfbfb;
+padding-top:30px;
+border:1px solid #b7b7b7;
+color:#606060;
+display:inline-block;
+font:bold 10px/100% Arial,sans-serif;
+      }
+
+
+      .testbutton1
+      {
+float:left;
+margin-left: 0px;
+height: 50px;
+width:107px;
+line-height: 22px;
+text-align:left;
+ background:url('pictures/dialer-icon.png')0 0 repeat-x;background-size:100%;
+background-color:#fbfbfb;
+padding-top:30px;
+border:1px solid #b7b7b7;
+color:#606060;
+display:inline-block;
+font:bold 10px/50% Arial,sans-serif;
+      }
+
+
+
+      .testbutton2
+      {
+float:left;
+margin-left: 0px;
+height: 50px;
+width:107px;
+line-height: 22px;
+text-align:left;
+ background:url('pictures/contacts.png')0 0 repeat-x;background-size:100%;
+background-color:#fbfbfb;
+padding-top:30px;
+border:1px solid #b7b7b7;
+color:#606060;
+display:inline-block;
+font:bold 10px/50% Arial,sans-serif;
+      }
+
+
+      .testbutton3
+      {
+float:left;
+margin-left: 0px;
+height: 50px;
+width:107px;
+line-height: 22px;
+text-align:left;
+ background:url('pictures/group.png')0 0 repeat-x;background-size:100%;
+background-color:#fbfbfb;
+padding-top:30px;
+border:1px solid #b7b7b7;
+color:#606060;
+display:inline-block;
+font:bold 10px/50% Arial,sans-serif;
+      }
+
+
+      .testbutton4
+      {
+float:left;
+margin-left: 0px;
+height: 50px;
+width:107px;
+line-height: 22px;
+text-align:left;
+ background:url('pictures/sms-icon.png')0 0 repeat-x;background-size:100%;
+background-color:#fbfbfb;
+padding-top:30px;
+border:1px solid #b7b7b7;
+color:#606060;
+display:inline-block;
+font:bold 10px/50% Arial,sans-serif;
+      }
+
+
+
+      .testbutton5
+      {
+float:left;
+margin-left: 0px;
+height: 50px;
+width:107px;
+line-height: 22px;
+text-align:left;
+ background:url('pictures/call-log.png')0 0 repeat-x;background-size:100%;
+background-color:#fbfbfb;
+padding-top:30px;
+border:1px solid #b7b7b7;
+color:#606060;
+display:inline-block;
+font:bold 10px/50% Arial,sans-serif;
+      }
+
+
+
+      .testbutton6
+      {
+float:left;
+margin-left: 0px;
+height: 50px;
+width:107px;
+line-height: 22px;
+text-align:left;
+ background:url('pictures/block.png')0 0 repeat-x;background-size:100%;
+background-color:#fbfbfb;
+padding-top:30px;
+border:1px solid #b7b7b7;
+color:#606060;
+display:inline-block;
+font:bold 10px/50% Arial,sans-serif;
+      }
+
+
+.resizedTextboxCal {
+border: 0px solid #6297BC;
+background-repeat:no-repeat;
+padding-left:170px;
+background-color:transparent;
+width:260px;
+font-size : 0.4em;
+}
+
+
+
+/*body { background:url('pictures/bg.png') 0 0 repeat-x;background-size:320px 455px;font-family: Arial, Tahoma, sans-serif; color: #ccc; } */
+
+
+body { background:url('pictures/bg.png') 0 0 repeat-x;background-size:100% 100%; } 
+
+skin {  background:url('pictures/skin-bg.png'); }
+
+.checkbox {    background: url(blue-checkbox-bg.png) no-repeat;            }
+
+
+.submit1, .button { text-align : center; height: 50px;width: 50px; background: url('pictures/call_log.png') 0 0 repeat-x;background-size:80px 80px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit2, .button { text-align : center; height: 50px;width: 50px; background: url('pictures/DeleteRed.png') 0 0 repeat-x;background-size:80px 80px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit3, .button { text-align : center; height: 50px;width: 50px; background: url('pictures/MailSend.png') 0 0 repeat-x;background-size:80px 80px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+
+
+.submit4, .button { text-align : center; height: 80px;width:140px; background: url('pictures/accept-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit5, .button { text-align : center; height: 80px;width: 140px; background: url('pictures/reject-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit6, .button { text-align : center; height: 80px;width: 140px; background: url('pictures/orange-btn2.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.submit7, .button { text-align : center; height: 30px;width: 80px; background: url('pictures/delete.png') 0 0 repeat-x;background-size:293px 54px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit8, .button { text-align : center; height: 30px;width: 80px; background: url('pictures/forward.png') 0 0 repeat-x;background-size:293px 54px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit9, .button { text-align : center; height: 30px;width: 80px; background: url('pictures/reply.png') 0 0 repeat-x;background-size:293px 54px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+
+.submit10, .button { text-align : center; height: 120px; width: 130px; background: url('pictures/family-icon.png') 0 0 repeat-x;background-size:100%; float : left; color : black; font-size : 1.0em; margin : 5px; border: none; padding: 0 10px; font-weight:; padding-top:30px;}
+.submit11, .button { text-align : center; height: 120px;width: 130px; background: url('pictures/friends-icon.png') 0 0 repeat-x;background-size:100%; float : left; color : black; font-size : 1.0em; margin : 5px; border: none; padding: 0 10px; font-weight:; padding-top:30px;}
+.submit12, .button { text-align : center; height: 120px;width: 130px; background: url('pictures/colleagues-icon.png') 0 0 repeat-x;background-size:100%; float : left; color : black; font-size : 1.0em; margin : 5px; border: none; padding: 0 10px; font-weight:; padding-top:30px;}
+.submit13, .button { text-align : center; height: 120px;width: 130px; background: url('pictures/other-icon.png') 0 0 repeat-x;background-size:100%; float : left; color : black; font-size : 1.0em; margin : 5px; border: none; padding: 0 10px; font-weight:; padding-top:30px;}
+
+
+
+
+
+.submit14, .button { text-align : center; height: 80px;width: 80px; background: url('pictures/5min.png') 0 0 repeat-x;background-size:80px 80px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit15, .button { text-align : center; height: 80px;width: 80px; background: url('pictures/10min.png') 0 0 repeat-x;background-size:80px 80px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit16, .button { text-align : center; height: 80px;width: 80px; background: url('pictures/15min.png') 0 0 repeat-x;background-size:80px 80px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit17, .button { text-align : center; height: 80px;width: 80px; background: url('pictures/20min.png') 0 0 repeat-x;background-size:80px 80px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit18, .button { text-align : center; height: 35px;width: 170px; background: url('pictures/Cancel.png') 0 0 repeat-x;background-size:293px 54px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+.submit19, .button { text-align : center; height: 50px;width: 305px; background: url('pictures/thebar.jpg') 0 0 repeat-x;background-size:293px 54px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.submit24, .button { text-align : center; height: 50px;width: 305px; background: url('pictures/call-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit25, .button { text-align : center; height: 50px;width: 305px; background: url('pictures/snooze-btn.png') 0 0 repeat-x;background-size:100% ; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.submit26, .button { text-align : center; height: 50px;width: 305px; background: url('pictures/cancel-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.submit27, .button { text-align : center; height: 50px;width: 300px; background: url('pictures/cancel-btn2.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.savebtn, .button { text-align : center; height: 30px;width: 175px; background: url('pictures/save-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+.savebtn2, .button { text-align : center; height: 30px;width: 280px; background: url('pictures/save-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+
+.savebtnbig, .button { text-align : center; height: 30px;width: 300px; background: url('pictures/save-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.plusicon, .button { text-align : center; height: 20px;width: 5px; background: url('pictures/plus-icon.png') 0 0 repeat-x;background-size:22px 20px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.blueln, .button { text-align : center; height: 40px;width: .5px; background: url('pictures/blue-line.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+
+.searchicon, .button { text-align : center; height: 20px;width: 20px; background: url('pictures/search-btn.png') 0 0 repeat-x;background-size:20px 20px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+ 
+
+
+.searchfld, .button { text-align : center; height: 40px;width: 290px; background: url('pictures/search-feild-bg.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.submitbtn, .button { text-align : center; height: 40px;width: 200px; background: url('pictures/orange-btn.png') 0 0 repeat-x;background-size:391px 40px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.submitbtn2, .button { text-align : center; height: 35px;width: 310px; background: url('pictures/orange-btn.png') 0 0 repeat-x;background-size:391px 40px; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+
+.submitbtn3, .button { text-align : center; height: 40px;width: 300px; background: url('pictures/orange-send-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+.deletebtn, .button { text-align : center; height: 40px;width: 140px; background: url('pictures/delete-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : white; font-size : 0.8em; margin : 5px; border: none; padding: 0 10px; font-weight:600 ; padding-right:50px;}
+.forwardbtn, .button { text-align : center; height: 40px;width: 140px; background: url('pictures/forward-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : white; font-size : 0.8em; margin : 5px; border: none; padding: 0 10px;font-weight:600 ; padding-right:50px;}
+.replybtn, .button { text-align : center; height: 40px;width: 300px; background: url('pictures/reply-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : white; font-size : 0.8em; margin : 5px; border: none; padding: 0 10px;font-weight:600 ; padding-right:50px;}
+
+
+
+
+.newsms, .button { text-align : center; height: 120px;width: 130px; background: url('pictures/new-sms.png') 0 0 repeat-x;background-size:100%; float : left; color : black; font-size : 1.0em; margin : 5px; border: none; padding: 0 10px;  font-weight:; padding-top:30px;}
+
+.smsinbox, .button { text-align : center; height: 120px;width: 130px; background: url('pictures/sms-inbox.png') 0 0 repeat-x;background-size:100%; float : left; color : black; font-size : 1.0em; margin : 5px; border: none; padding: 0 10px; font-weight:; padding-top:30px; }
+
+.personalsign, .button { text-align : center; height: 120px;width: 130px; background: url('pictures/personal-sign.png') 0 0 repeat-x;background-size:100%; float : left; color : black; font-size : 1.0em; margin : 5px; border: none; padding: 0 10px;  font-weight:; padding-top:30px; display:block;}
+
+.sentsms, .button { text-align : center; height: 120px;width: 130px; background: url('pictures/sent-sms.png') 0 0 repeat-x;background-size:100%; float : left; color : black; font-size : 1.0em; margin : 5px; border: none; padding: 0 10px;  font-weight:; padding-top:30px;}
+
+.wowbutton, .button { text-align : center; height: 45px;width: 290px; background: url('pictures/orange-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.grayrow, .button { text-align : center; height: 40px;width: 300px; background: url('pictures/gray-row-bg.png.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+.lightgrayrow, .button { text-align : center; height: 40px;width: 300px; background: url('pictures/lightgray-row-bg-small.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+.bigorange, .button { text-align : center; height: 80px;width: 140px; background: url('pictures/orange-btn2.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+
+
+.sendnow, .button { text-align : center; height: 40px;width: 90px; background: url('pictures/orange-send-now-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.6em; font-weight:bold; margin : 5px; border: none; padding: 0 10px; }
+
+.sendlatter, .button { text-align : center; height: 40px;width: 190px; background: url('pictures/orange-send-latter-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+.bluebg, .button { text-align : center; height: 60px;width: 300px; background: url('pictures/blue-bg.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+.bluebg2, .button { text-align : center; height: 100px;width: 300px; background: url('pictures/blue-bg.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+
+.bluerow, .button { text-align : center; height: 30px;width: 300px; background: url('pictures/blue-row-bg.png') 0 0 repeat-x;background-size:300px 30px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+
+.callbtn, .button { text-align : center; height: 30px;width: 20px; background: url('pictures/green-phone-icon.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+.deletenum, .button { text-align : center; height: 30px;width: 20px; background: url('pictures/red-cross-icon.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+.calllog1, .button { text-align : center; height: 60px;width: 100px; background: url('pictures/green-btn3.png') 0 0 repeat-x;background-size:100%; float : left; color : white; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; font-weight:500 ; padding-top:20px;  }
+
+.calllog2, .button { text-align : center; height: 60px;width: 100px; background: url('pictures/red-btn3.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; font-weight:500 ; padding-top:20px; }
+
+.calllog3, .button { text-align : center; height: 60px;width: 100px; background: url('pictures/orange-btn3.png') 0 0 repeat-x;background-size:100%; float : left; color : white; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; font-weight:500 ; padding-top:20px;}
+
+.submityellow, .button { text-align : center; height: 40px;width: 282px; background: url('pictures/yellow-btn.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+.contactplus, .button { text-align : center; height: 20px;width: 130px; background: url('pictures/contact-plus.png') 0 0 repeat-x;background-size:130px 20px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;font-weight:bold; padding-right:20px; } 
+
+.contactcross, .button { text-align : center; height: 30px;width: 120px; background: url('pictures/contact-cross.png') 0 0 repeat-x;background-size:120px 30px; float : left; color : white; font-size : 0.6em; margin : 5px; border: none; padding: 0 10px; font-weight:bold; padding-right:30px; } 
+
+
+.contacttick, .button { text-align : center; height: 30px;width: 120px; background: url('pictures/contact-tick.png') 0 0 repeat-x;background-size:120px 30px; float : left; color : white; font-size : 0.6em; margin : 5px; border: none; padding: 0 10px; font-weight:bold; padding-right:30px;} 
+
+.footer, .button { text-align : center; height: 40px;width: 315px; background: url('pictures/footer.png') 0 0 repeat-x;background-size:120px 30px; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+.footer1, .button { text-align : center; height: 35px;width: 320px; background: url('pictures/show-up.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+.footer2, .button { text-align : center; height: 35px;width: 320px; background: url('pictures/hide-down.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+
+
+
+.greenphone, .button { text-align : center; height: 20px;width: 20px; background: url('pictures/green-phone-icon.png') 0 0 repeat-x;background-size:14px 12px; background-repeat:no-repeat; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+
+.redcross, .button { text-align : center; height: 20px;width: 20px; background: url('pictures/red-cross-icon.png') 0 0 repeat-x;background-size:14px 12px; background-repeat:no-repeat; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+
+
+
+
+
+
+.bluecross, .button { text-align : center; height: 25px;width: 16px; background: url('pictures/blue-cross-icon.png') 0 0 repeat-x;background-size:16px 16px; background-repeat:no-repeat; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+
+
+
+
+
+.speedbtn, .button { text-align : center; height:25px;width: 125px; background: url('pictures/profile-pic-bg.png') 0 0 repeat-x;background-size:100%; float : left; color : #111; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px;} 
+
+
+.addcontact, .button { text-align : center; height: 20px;width: 5px; background: url('pictures/adduser.png') 0 0 repeat-x;background-size:100%; float : left; color : #eee; font-size : 0.9em; margin : 5px; border: none; padding: 0 10px; }
+
+
+

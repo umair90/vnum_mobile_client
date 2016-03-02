@@ -1,0 +1,271 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>PhoneGap</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8">
+
+	document.addEventListener("deviceready", onDeviceReady, false);
+var callerNum;
+function onDeviceReady() {
+	console.error("Cordova Device Ready");
+	cordova.exec(getCallerSuc,  getCallerErr,  "Connection", "getCallerNo", []);
+        
+	    }
+
+function getCallerSuc(callernum){
+callerNum = callernum;
+
+}
+
+function getCallerErr(callernum){
+
+}
+
+function callBack(action){
+
+console.error("Button Clicked "+ action)
+cordova.exec(callBackSuccess,callBackError, "CallBack", action, []);
+}
+
+function callBackError(){
+
+console.error("Call Back Plugin Error")
+}
+
+function callBackSuccess(){
+
+console.error("Call Back Plugin Success")
+}
+
+function Call(){
+navigator.app.loadUrl('tel:'+callerNum);
+}
+
+
+
+function opencontact() 
+{
+
+window.location.replace("Contact_View.html");
+//document.getElementById("frame1").src="Contact_View.html";
+
+}
+
+
+function opensetting()
+{
+
+window.location.replace("settings.html");
+//document.getElementById("frame1").src="settings.html";
+
+}
+
+
+
+function openblock()
+{
+window.location.replace("block.html");
+
+}
+
+
+function opengroups()
+{
+window.location.replace("Groups.html");
+
+}
+
+
+function opensms()
+{
+window.location.replace("sms_manager.html");
+
+
+}
+
+
+function opencalllog()
+{
+window.location.replace("call_log.html");
+
+}
+
+
+
+function hide_menu(id)
+{
+  document.getElementById(id).style.display = "none";    
+  document.getElementById("hide1").style.display = "none";
+  document.getElementById("hide2").style.display = "block";      
+   
+   
+
+}
+
+function show_menu(id)
+{
+    document.getElementById(id).style.display = "block";
+    document.getElementById("hide2").style.display = "none";  
+    document.getElementById("hide1").style.display = "block";     
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+  </head>
+
+<div style="position: absolute; left:10px; right:20px; top:6px " > 
+<img src="pictures/home-icon.png" alt=""  width="30px" height="30px" value=""/>
+</div>
+
+
+<div style="position: absolute; left:80px; right:0px; top:8px " >
+<label id="callernum"><font size="5" color="white">Call Back Timer</font></label>
+</div>
+
+
+<div style="position: absolute; left:4px; top:55px " >
+<td><input class="bluebg" onclick="" type="text" value="" style="color:black; text-align:left"/></td>
+</div>
+<!--
+<div style="position: absolute; left:8px; right:0px; top:59 ">
+<form> 
+  	 <input type="text" class="resizedTextboxA" name="pass" id="pass" onclick="changetype(this)" style="background-color:transparent; color:#306754"  /><br />
+</form> 
+</div>
+-->
+
+
+<div style="position: absolute; left:5px; right:20px; top:120px " >
+<td><input class="bigorange" onclick="callBack('Five')" type="button" value=""/></td>
+</div>
+<div style="position: absolute; left:25px; right:0px; top:140px ">
+<label id="Tittle"><font size="3" color="white">5 Minutes</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:170px; right:20px; top:120px " >
+<td><input class="bigorange" onclick="callBack('Ten')" type="button" value=""  /></td>
+</div>
+<div style="position: absolute; left:200px; right:0px; top:140px ">
+<label id="Tittle"><font size="3" color="white">10 Minutes</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:5px; right:20px; top:200px " >
+<td><input class="bigorange" onclick="callBack('Fifteen')" type="button" value=""  /></td>
+</div>
+<div style="position: absolute; left:25px; right:0px; top:210px ">
+<label id="Tittle"><font size="3" color="white">15 Minutes</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:170px; right:20px; top:200px " >
+<td><input class="bigorange" onclick="callBack('Twenty')" type="button" value="" /></td>
+</div>
+<div style="position: absolute; left:200px; right:0px; top:220px ">
+<label id="Tittle"><font size="3" color="white">20 Minutes</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:5px; top:290px " >
+<td><input class="submit27" onclick="" type="button" value=""/></td>
+</div>
+
+<div style="position: absolute; left:110px; right:0px; top:300px ">
+<label id="Tittle"><font size="3" color="white">Cancel Call Back</font></label>
+</div>
+
+
+
+
+
+
+<div style="position: absolute; left:-5px;  top:255px; display:none " id="hide1" > 
+
+
+<input type="submit" class="footer2" name="hideandshow" value="" onclick="if (document.getElementById('id1').style.display=='none') show_menu('id1'); else hide_menu('id1'); if (document.getElementById('id2').style.display=='none') show_menu('id2'); else hide_menu('id2'); if (document.getElementById('id3').style.display=='none') show_menu('id3'); else hide_menu('id3'); if (document.getElementById('id4').style.display=='none') show_menu('id4'); else hide_menu('id4'); if (document.getElementById('id5').style.display=='none') show_menu('id5'); else hide_menu('id5'); if (document.getElementById('id6').style.display=='none') show_menu('id6'); else hide_menu('id6'); if (document.getElementById('id7').style.display=='none') show_menu('id7'); else hide_menu('id7'); " />
+
+
+</div>
+
+
+<div style="position: absolute; left:-5px;  top:415px " id="hide2"> 
+
+<input type="submit" class="footer1" name="hideandshow" value="" onclick="if (document.getElementById('id1').style.display=='none') show_menu('id1'); else hide_menu('id1'); if (document.getElementById('id2').style.display=='none') show_menu('id2'); else hide_menu('id2'); if (document.getElementById('id3').style.display=='none') show_menu('id3'); else hide_menu('id3'); if (document.getElementById('id4').style.display=='none') show_menu('id4'); else hide_menu('id4'); if (document.getElementById('id5').style.display=='none') show_menu('id5'); else hide_menu('id5'); if (document.getElementById('id6').style.display=='none') show_menu('id6'); else hide_menu('id6'); if (document.getElementById('id7').style.display=='none') show_menu('id7'); else hide_menu('id7');" />
+
+</div>
+
+
+
+
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:290px; display:none" id="id3" >
+<input type="submit" class="testbutton1" name="Dialer" value="Dialer" size="1" style = "width:120px; height:85px; text-align:center"/>
+</div>
+
+
+
+
+<div style="position: absolute; left:105px; right:0px; top:290px; display:none" id="id4" >
+
+<input type="submit" class="testbutton2" name="Contacts" value="Contacts" size="1" onclick="opencontact()" style = "width:120px; height:85px; text-align:center" />
+
+</div>
+
+
+
+<div style="position: absolute; left:205px; right:0px; top:290px; display:none" id="id5" >
+
+<input type="submit" class="testbutton3" name="Groups" value="Groups" size="1" onclick="opengroups()" style = "width:115px; height:85px ; text-align:center" />
+
+</div>
+
+<div style="position: absolute; left:0px; right:0px; top:345px; display:none"  id="id6" >
+
+<input type="submit" class="testbutton4" name="SMS" value="SMS" size="1"  onclick="opensms()" style = "width:120px; height:85px; text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:105px; right:0px; top:345px; display:none" id="id7" >
+
+<input type="submit" class="testbutton5" name="Calllog" value="Call Log" size="1" onclick="opencalllog()" style = "width:120px; height:75px; text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:205px; right:0px; top:345px; display:none" id="id1" >
+
+<input type="submit" class="testbutton6" name="Block" value="Block" size="1" onclick="openblock()" style = "width:115px; height:75px; text-align:center" />
+
+</div>
+
+
+<div style="position: absolute; left:0px; right:0px; top:400px; display:none" id="id2"  >
+ <BUTTON type ="submit" class = "testbutton" name = "Settings" value = "" onclick="opensetting()" style = "width:320px; height:55px; text-align:center">
+ <div style="position: absolute; left:9px; right:0px; top:35px " >
+ <label><font>Settings</font></label>
+ </div>
+</button>
+</div>
+
+

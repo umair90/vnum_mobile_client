@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/appmobilibrary.jar"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/cordova-2.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/jackson-core-asl-1.9.3.jar"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/jackson-mapper-asl-1.9.3.jar"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/javolution-5.5.1.jar"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/jWebSocketClientAPI-1.0.jar"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/jWebSocketCommon-1.0.jar"/>
+	<classpathentry kind="lib" path="/home/earthfactor/DEV/vnum/vnum_mobile_client_v2/vnum_mobile_client_v2/libs/jWebSocketJavaSEClient-1.0.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

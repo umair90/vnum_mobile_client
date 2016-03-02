@@ -1,0 +1,434 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>PhoneGapLogin</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8"> 
+ 
+
+var id=window.localStorage.getItem("id");
+window.localStorage.removeItem("id");
+var Messagetype;
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	console.error("Cordova Device Ready");
+        var db = window.openDatabase("vnumber", "1.0", "VNum", 200000);   
+       
+         if(window.localStorage.getItem("sent")==100){
+          window.localStorage.removeItem("sent");
+	  Messagetype=1;                                   //outbox
+          db.transaction(sentDB, errorCT);
+          }
+          else if(window.localStorage.getItem("recv")==100){
+          window.localStorage.removeItem("recv");
+	  Messagetype=0;                                   //inbox
+          db.transaction(recvDB, errorCT);
+          }
+
+          
+	    }
+
+
+function sentDB(tx) {
+	tx.executeSql("SELECT * FROM sendsms where id="+id, [], querySuccess, errorCT);
+    }
+
+
+function recvDB(tx) {
+	tx.executeSql("SELECT * FROM receivesms where id="+id, [], querySuccess, errorCT);
+    }
+
+
+
+
+
+function querySuccess(tx, results) {
+	var len = results.rows.length
+	console.error("Returned rows = " + len);
+	for (var i=0; i<len; i++){
+	console.log ("Row = " + i + " ID = " + results.rows.item(i).id + " sender" + results.rows.item(i).sender + " receiver" + results.rows.item(i).receiver + " Name" + results.rows.item(i).msg + " sent" + results.rows.item(i).read) 
+     //   results.rows.item(i).id;
+      //  results.rows.item(i).sender;
+       // results.rows.item(i).receiver;
+      //  msg=results.rows.item(i).msg;
+     //   addRow("ExtTable",sender,msg,id);
+	
+
+document.getElementById("no").value=results.rows.item(i).receiver;
+        //document.getElementById("no").value=results.rows.item(i).sender;
+        document.getElementById("sms").value=results.rows.item(i).msg;
+         
+
+      
+	}
+   }
+
+
+
+
+
+
+
+
+
+function opencontact() 
+{
+
+window.location.replace("Contacts.html");
+//document.getElementById("frame1").src="Contact_View.html";
+
+}
+
+
+function opensetting()
+{
+
+window.location.replace("settings.html");
+//document.getElementById("frame1").src="settings.html";
+
+}
+
+
+
+function openblock()
+{
+window.location.replace("block.html");
+
+}
+
+
+function opengroups()
+{
+window.location.replace("Groups.html");
+
+}
+
+
+function opensms()
+{
+window.location.replace("sms_manager.html");
+
+
+}
+
+
+function opencalllog()
+{
+window.location.replace("call_log.html");
+
+}
+
+
+
+function hide_menu2(id)
+{
+  document.getElementById(id).style.display = "none";    
+  document.getElementById("hide1").style.display = "none";
+  document.getElementById("hide2").style.display = "block";      
+   
+   
+
+}
+
+function show_menu2(id)
+{
+    document.getElementById(id).style.display = "block";
+    document.getElementById("hide2").style.display = "none";  
+    document.getElementById("hide1").style.display = "block";     
+
+}
+function dialer(){
+
+
+navigator.app.loadUrl('tel:');
+}
+
+
+function setCredentials(no) {
+
+var txt = document.getElementById("no");
+
+//alert(txt.value);
+  window.location= "new_message.html";  
+
+}
+
+
+function replypressed()
+{
+  var reply=100;
+   window.localStorage.removeItem("Reply");
+   window.localStorage.setItem("Reply", reply);
+  var replyNo=document.getElementById("no").value;
+  window.localStorage.removeItem("ReplyNo");
+  window.localStorage.setItem("ReplyNo", replyNo);
+  window.location= "new_message.html";
+  //Session["test"] = textbox.Text;
+  //Response.Redirect("Page2.aspx"); 
+  
+
+}
+
+function forwardpressed()
+{
+
+  window.localStorage.removeItem("Forward");
+  window.localStorage.setItem("Forward", '100');
+	
+   window.localStorage.removeItem("ForwardmsgID");
+   window.localStorage.setItem("ForwardmsgID", id);
+
+   window.localStorage.removeItem("MsgType");
+   window.localStorage.setItem("MsgType", Messagetype);
+
+  window.location= "new_message.html";
+
+}
+
+
+
+
+function deletepressed(){
+
+				if(Messagetype==0){
+				var db = window.openDatabase("vnumber", "1.0", "VNum", 200000);   
+				db.transaction(DeleteRecvDB, errorCT);
+				
+
+				}
+				else if(Messagetype==1){
+				var db = window.openDatabase("vnumber", "1.0", "VNum", 200000);   
+				db.transaction(DeleteSentDB, errorCT);
+				
+
+
+				}				
+
+
+} // deletepressed()
+
+
+function DeleteRecvDB(tx){
+tx.executeSql("DELETE FROM receivesms where id="+id, [], RecvDeleteSuccess, errorCT);
+
+
+}
+
+function DeleteSentDB(tx){
+
+tx.executeSql("DELETE FROM sendsms where id="+id, [], SentDeletequerySuccess, errorCT);
+
+}
+
+
+function RecvDeleteSuccess(){
+console.log("RecvDeleteSuccess");
+window.location= "received.html";
+
+}
+function SentDeletequerySuccess(){
+console.log("SentDeletequerySuccess");
+window.location= "Sent_Message.html";
+}
+
+
+function errorCT(err) {
+     	console.error("Error processing SQL: "+err.code);
+}
+
+
+</script>
+
+
+
+
+
+<div style="position: absolute; left:10px; right:20px; top:6px " > 
+<a href="home.html">
+<img src="pictures/home-icon.png" alt=""  width="30px" height="30px" value=""/>
+</a>
+</div>
+
+
+
+<div style="position: absolute; left:100px; right:0px; top:8px; color:#00FFFF " >
+<label id="Tittle"><font size="4" style="color:white">SMS Viewer</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:10px;  top:48px " > 
+<img src="pictures/blue-bg.png" width="300px" height="40px" value=""/>
+</div>
+
+
+
+<div style="position: absolute; top:57px; left:20px" >
+<form> 
+	<input type="text" class="searchBox2" name="no" id="no"/>
+</form> 
+</div>
+
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:30px " >
+<label id="Tittle"><font size="4"> </font></label>
+</div>
+
+
+
+<div style="position: absolute; left:10px; right:20px; top:95px " > 
+<img src="pictures/skin-bg.png" alt=""  width="300px" height="120px" value=""/>
+</div>
+
+
+<div style="position: absolute; left:20px; top:105px " > 
+<img src="pictures/sms-white-bg.png" alt=""  width="280px" height="100px" value=""/>
+</div>
+
+
+<div style="position: absolute; left:18px; right:0px; top:102px">
+<!--<input type="text" class="resizedTextbox7" name="FromMin" value="" id="sms"/>-->
+
+<textarea rows="4" cols="30" style="background:url('pictures/sms-white-bg.png'); overflow:auto; border: none" id="sms">
+
+</textarea>
+
+</div>
+
+<!--
+<div style="position: absolute; left:20px; top:105px " > 
+<img src="pictures/white-bg.png" alt=""  width="280px" height="100px" value=""/>
+</div>
+
+
+<div style="position: absolute; left:20px; right:0px; top:105px">
+<input type="text" class="resizedTextbox7" name="FromMin" value="" id="sms"/>
+</div>
+-->
+
+
+<div style="position: absolute; left:5px; right:0px; top:225px " >
+<input class="replybtn" type="submit" name="reply" value="Reply" onclick="replypressed()"/>
+</div>
+<!--
+<div style="position: absolute; left:123px; right:0px; top:240px ">
+<label id="Tittle"><font size="3" color="white">Reply</font></label>
+</div>
+-->
+
+
+
+
+<div style="position: absolute; left:5px; right:0px; top:270px " >
+<input class="deletebtn" type="submit" name="delete" value="Delete" onclick="deletepressed()" />
+</div>
+<!--
+<div style="position: absolute; left:48px; right:0px; top:285px ">
+<label id="Tittle"><font size="3" color="white">Delete</font></label>
+</div>
+-->
+
+<div style="position: absolute; left:165px; right:0px; top:270px " >
+<input class="forwardbtn" type="submit" name="forward" value="Forward" onclick="forwardpressed()"/>
+</div>
+<!--
+<div style="position: absolute; left:195px; right:0px; top:285px ">
+<label id="Tittle"><font size="3" color="white">Forward</font></label>
+</div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+<!----------------------Drop Down Bar Code ------------------------------->
+
+
+
+<div style="position: absolute; left:-5px;  top:92% " id="hide2"> 
+
+<input type="submit" class="footer1" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A');" />
+
+</div>
+
+
+
+<!--<div style="position: absolute; left:0px;  top:10px " > <!--  Big Div here  -->
+
+
+<div style="position: absolute; left:-5px;  top:65%; display:none " id="hide1" > 
+
+
+<input type="submit" class="footer2" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A'); " />
+
+
+</div>
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:72%; display:none" id="id3A" >
+<input type="submit" class="testbutton1" name="Dialer" value="Dialer" onclick="dialer()"  style = " text-align:center"/>
+</div>
+
+
+
+
+<div style="position: absolute; left:107px; right:0px; top:72%; display:none" id="id4A" >
+
+<input type="submit" class="testbutton2" name="Contacts" value="Contacts" onclick="opencontact()" style = " text-align:center" />
+
+</div>
+
+
+
+<div style="position: absolute; left:214px; right:0px; top:72%; display:none" id="id5A" >
+
+<input type="submit" class="testbutton3" name="Groups" value="Groups"  onclick="opengroups()" style = "text-align:center" />
+
+</div>
+
+<div style="position: absolute; left:0px; right:0px; top:81%; display:none"  id="id6A" >
+
+<input type="submit" class="testbutton4" name="SMS" value="SMS" size="1"  onclick="opensms()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:107px; right:0px; top:81%; display:none" id="id7A" >
+
+<input type="submit" class="testbutton5" name="Calllog" value="Call Log" size="1" onclick="opencalllog()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:214px; right:0px; top:81%; display:none" id="id1A" >
+
+<input type="submit" class="testbutton6" name="Block" value="Block" size="1" onclick="openblock()" style = " text-align:center" />
+
+</div>
+
+
+<div style="position: absolute; left:0px; right:0px; top:90%; display:none" id="id2A"  >
+ <input type ="submit" class = "testbutton" name = "Settings" value = "Settings" onclick="opensetting()" style = " text-align:center" "/> 
+
+</div>
+
+
+<!--</div> <!-- Big Div End here -->
+
+
+
+
+
+</body>
+</html> 

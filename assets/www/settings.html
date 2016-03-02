@@ -1,0 +1,409 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>PhoneGapLogin</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8"> 
+ 
+
+	function saveLogOffScheduele(){
+		if(document.getElementById("LogOffSchedule").checked == true){
+			
+			var startTime = document.getElementById("startTime").value;
+			var endTime = document.getElementById("endTime").value;
+			cordova.exec(saveLogoffSuccess, saveLogoffError, "Contact", "saveLogoffSchedule", [startTime , endTime]);
+					
+		}
+	}
+
+	function saveLogoffSuccess(){
+		console.error("saveLogoffSuccess")
+	}
+	
+	function saveLogoffError(){
+		console.error("saveLogoffError")
+	}
+
+function dialer(){
+
+
+navigator.app.loadUrl('tel:');
+}
+
+
+
+function opencontact() 
+{
+
+window.location.replace("Contacts.html");
+//document.getElementById("frame1").src="Contact_View.html";
+
+}
+
+
+function opensetting()
+{
+
+window.location.replace("settings.html");
+//document.getElementById("frame1").src="settings.html";
+
+}
+
+
+
+function openblock()
+{
+window.location.replace("block.html");
+
+}
+
+
+function opengroups()
+{
+window.location.replace("Groups.html");
+
+}
+
+
+function opensms()
+{
+window.location.replace("sms_manager.html");
+
+
+}
+
+
+function opencalllog()
+{
+window.location.replace("call_log.html");
+
+}
+
+
+
+function hide_menu2(id)
+{
+  document.getElementById(id).style.display = "none";    
+  document.getElementById("hide1").style.display = "none";
+  document.getElementById("hide2").style.display = "block";      
+   
+   
+
+}
+
+function show_menu2(id)
+{
+    document.getElementById(id).style.display = "block";
+    document.getElementById("hide2").style.display = "none";  
+    document.getElementById("hide1").style.display = "block";     
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function hide_menu(id)
+{
+document.getElementById("mybtn1").style.display = "block"; 
+
+  document.getElementById(id).style.display = "none";   
+
+document.getElementById("id2").style.display = "block";  
+  //document.getElementById("hide1").style.display = "none";
+  //document.getElementById("hide2").style.display = "block";      
+   
+
+
+
+
+}
+
+function show_menu(id)
+{
+    document.getElementById(id).style.display = "block";  
+    document.getElementById("id2").style.display = "none";
+    document.getElementById("mybtn1").style.display = "none";    
+    //document.getElementById("hide2").style.display = "none";  
+    //document.getElementById("hide1").style.display = "block";     
+
+}
+
+
+
+
+function changetype(args)
+{
+
+if(args.value=="hh:mm")
+args.value='';
+
+}
+
+
+</script>
+
+
+
+
+<div style="position: absolute; left:10px; right:20px; top:6px " > 
+<a href="home.html">
+<img src="pictures/home-icon.png" alt=""  width="30px" height="30px" value=""/>
+</a>
+</div>
+
+<div style="position: absolute; left:80px; right:0px; top:13px " >
+<label id="Tittle"><font size="4"style="color:white">Account Settings</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:45px " > 
+<img src="pictures/skin-bg.png" alt=""  width="315px" height="230px" value=""/>
+</div>
+
+<div  style="position: absolute; left:0px; right:0px; top:50px " >
+<input class="bluerow" type="submit" name="Save" value="Virtual Number Status" id="mybtn2" onclick="if (document.getElementById('id1').style.display=='none') show_menu('id1'); else hide_menu('id1');hideme(mybtn1);" />
+</div>
+
+
+<div style="display:block" id="id2" > <!--------------- Big Div Start Here.................-->
+
+
+
+
+ <div style="position: absolute; left:5px; right:0px; top:55px " > 
+<img src="pictures/white-bg.png" alt=""  width="300px" height="170px" value=""/>
+</div>
+
+
+<div style="position: absolute; left:90px; right:0px; top:58px " >
+<label id="Tittle"><font size="3" color="black">Virtual Number Status</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:13px; right:0px; top:82px " > 
+<img src="pictures/gray-row-bg.png" alt=""  width="280px" height="25px" value=""/>
+</div>
+
+
+<div style="position: absolute; left:12px; right:0px; top:83px " >
+<input type="radio" name="allcall" value="Block Calls" id="BlockCalls" />
+</div>
+
+
+
+<div style="position: absolute; left:34px; right:0px; top:90px " >
+<label id="Tittle"><font size="1" style="color:black">Logged in/Active</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:13px; right:0px; top:115px " > 
+<img src="pictures/lightgray-row-bg-small.png" alt=""  width="280px" height="25px" value=""/>
+</div>
+
+<div style="position: absolute; left:12px; right:0px; top:110px " >
+<input type="radio" name="allcall" value="Block Calls" id="BlockSchedule" />
+</div>
+
+<div style="position: absolute; left:34px; right:0px; top:120px " >
+<label id="Tittle"><font size="1" style="color:black">LoggedOff</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:13px; right:0px; top:150px " > 
+<img src="pictures/lightgray-row-bg-small.png" alt=""  width="280px" height="25px" value=""/>
+</div>
+
+<div style="position: absolute; left:12px; right:0px; top:145px " >
+<input type="radio" name="allcall" value="Block Calls" id="LogOffSchedule" />
+</div>
+
+<div style="position: absolute; left:34px; right:0px; top:155px " >
+<label id="Tittle"><font size="1" style="color:black">LoggedOff Schedule</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:130px; right:0px; top:150px " >
+<input type="text" name="FromMin" value="hh:mm" size="5" id="startTime" onclick="changetype(this)" />
+</div>
+
+
+<div style="position: absolute; left:210px; right:0px; top:150px  ">
+<input type="text" name="FromMin" value="hh:mm" size="5" id="endTime" onclick="changetype(this)" />
+</div>
+
+
+<div  style="position: absolute; left:15px; right:0px; top:185px " >
+<input class="savebtn2" type="submit" name="Save" value="Save" id="" onclick="saveLogOffScheduele()"/>
+</div>
+
+<div style="position: absolute; left:145px; right:0px; top:195px " >
+<!--<label id="Tittle"><font size="3" style="color:white">Save</font></label> -->
+</div>
+
+
+</div>  <!--         Big Div End here............... -->
+
+
+
+<div style="display:none ;" id="id1" >             <!-- Big Display div Start here                     -->
+
+ <div style="position: absolute; left:5px; right:0px; top:85px " > 
+<img src="pictures/white-bg.png" alt=""  width="300px" height="170px" value=""/>
+</div>
+
+
+<div style="position: absolute; left:90px; right:0px; top:90px " >
+<label id="Tittle"><font size="3" color="black">Synchorize Contacts</font></label>
+</div>
+
+
+<div style="position: absolute; left:9px; right:0px; top:120px " >
+<input type="radio" name="allcall" value="Block Calls" id="BlockCalls" />
+</div>
+
+
+
+<div style="position: absolute; left:30px; right:0px; top:125px " >
+<label id="Tittle"><font size="1" style="color:black">With Mobile Phone Contact</font></label>
+</div>
+
+<div style="position: absolute; left:9px; right:0px; top:140px " >
+<input type="radio" name="allcall" value="Block Calls" id="BlockCalls" />
+</div>
+
+
+
+<div style="position: absolute; left:30px; right:0px; top:145px " >
+<label id="Tittle"><font size="1" style="color:black">With Web Account Contacts</font></label>
+</div>
+
+
+
+<div  style="position: absolute; left:15px; right:0px; top:185px " >
+<input class="savebtn2" type="submit" name="Save" value="" id="" />
+</div>
+
+<div style="position: absolute; left:145px; right:0px; top:195px " >
+<label id="Tittle"><font size="3" style="color:white">Start</font></label>
+</div>
+
+
+
+
+
+</div> <!--       Big Div enD heree......... -->
+
+<div  style="position: absolute; left:5px; right:0px; top:225px ; display:none " >
+<input class="bluerow" type="submit" name="Save" value="Synchorize Contacts" id="mybtn1" onclick="if (document.getElementById('id1').style.display=='none') show_menu('id1'); else hide_menu('id1');hideme(mybtn1);" />
+</div>
+
+
+
+
+<div  style="position: absolute; left:0px; right:0px; top:275px " >
+<input class="submitbtn2" type="submit" name="Save" value="" id="" />
+</div>
+
+<div style="position: absolute; left:105px; right:0px; top:285px " >
+<label id="Tittle"><font size="3" color="white">Dial Virtual Number</font></label>
+</div>
+
+
+
+
+
+
+
+<!----------------------Drop Down Bar Code ------------------------------->
+
+
+
+<div style="position: absolute; left:-5px;  top:92% " id="hide2"> 
+
+<input type="submit" class="footer1" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A');" />
+
+</div>
+
+
+
+<!--<div style="position: absolute; left:0px;  top:10px " > <!--  Big Div here  -->
+
+
+<div style="position: absolute; left:-5px;  top:65%; display:none " id="hide1" > 
+
+
+<input type="submit" class="footer2" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A'); " />
+
+
+</div>
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:72%; display:none" id="id3A" >
+<input type="submit" class="testbutton1" name="Dialer" value="Dialer" onclick="dialer()"  style = " text-align:center"/>
+</div>
+
+
+
+
+<div style="position: absolute; left:107px; right:0px; top:72%; display:none" id="id4A" >
+
+<input type="submit" class="testbutton2" name="Contacts" value="Contacts" onclick="opencontact()" style = " text-align:center" />
+
+</div>
+
+
+
+<div style="position: absolute; left:214px; right:0px; top:72%; display:none" id="id5A" >
+
+<input type="submit" class="testbutton3" name="Groups" value="Groups"  onclick="opengroups()" style = "text-align:center" />
+
+</div>
+
+<div style="position: absolute; left:0px; right:0px; top:81%; display:none"  id="id6A" >
+
+<input type="submit" class="testbutton4" name="SMS" value="SMS" size="1"  onclick="opensms()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:107px; right:0px; top:81%; display:none" id="id7A" >
+
+<input type="submit" class="testbutton5" name="Calllog" value="Call Log" size="1" onclick="opencalllog()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:214px; right:0px; top:81%; display:none" id="id1A" >
+
+<input type="submit" class="testbutton6" name="Block" value="Block" size="1" onclick="openblock()" style = " text-align:center" />
+
+</div>
+
+
+<div style="position: absolute; left:0px; right:0px; top:90%; display:none" id="id2A"  >
+ <input type ="submit" class = "testbutton" name = "Settings" value = "Settings" onclick="opensetting()" style = " text-align:center" "/> 
+
+</div>
+
+
+<!--</div> <!-- Big Div End here -->
+
+
+
+
+</body>
+</html> 

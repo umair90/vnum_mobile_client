@@ -1,0 +1,305 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>PhoneGap</title>
+      <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title">
+      <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+      <script type="text/javascript" charset="utf-8">
+
+var callerNum;
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	console.error("Cordova Device Ready");
+	cordova.exec(getCallerSuc,  getCallerErr,  "Connection", "getCallerNo", []);
+       
+	    }
+
+function getCallerSuc(callernum){
+callerNum = callernum;
+//alert("calling Number is " + callernum)
+var cNum=document.getElementById('callernum')
+cNum.innerHTML = callerNum;
+}
+
+function getCallerErr(callernum){
+
+}
+
+function sendResponse(action){
+
+console.error("Button Clicked "+ action)
+cordova.exec(sendResponseSuccess, sendResponseError, "SendCallResp", action, []);
+}
+
+function sendResponseError(){
+
+console.error("Send Response Error")
+}
+
+function sendResponseSuccess(){
+
+console.error("Send Response Success")
+}
+
+function callBack(){
+navigator.app.loadUrl('file:///android_asset/www/Call_back.html');
+}
+
+
+
+
+function opencontact() 
+{
+
+window.location.replace("Contact_View.html");
+//document.getElementById("frame1").src="Contact_View.html";
+
+}
+
+
+function opensetting()
+{
+
+window.location.replace("settings.html");
+//document.getElementById("frame1").src="settings.html";
+
+}
+
+
+
+function openblock()
+{
+window.location.replace("block.html");
+
+}
+
+
+function opengroups()
+{
+window.location.replace("Groups.html");
+
+}
+
+
+function opensms()
+{
+window.location.replace("sms_manager.html");
+
+
+}
+
+
+function opencalllog()
+{
+window.location.replace("call_log.html");
+
+}
+
+
+
+function hide_menu(id)
+{
+  document.getElementById(id).style.display = "none";    
+  document.getElementById("hide1").style.display = "none";
+  document.getElementById("hide2").style.display = "block";      
+   
+   
+
+}
+
+function show_menu(id)
+{
+    document.getElementById(id).style.display = "block";
+    document.getElementById("hide2").style.display = "none";  
+    document.getElementById("hide1").style.display = "block";     
+
+}
+
+
+
+
+</script>
+
+  </head>
+
+
+
+<div style="position: absolute; left:10px; right:20px; top:6px " > 
+<a href="home.html">
+<img src="pictures/home-icon.png" alt=""  width="30px" height="30px" value=""/>
+</a>
+</div>
+<div style="position: absolute; left:80px; right:0px; top:13px; color:white " >
+<label id="Tittle"><font size="4" >Call Recieving Options</font></label>
+</div>
+
+
+
+
+<label id="callernum"></label>
+<script>
+//document.getElementById('callernum').innerHTML=callerNum;
+</script>
+
+<div style="position: absolute; left:10px;  top:48px " > 
+<img src="pictures/blue-bg.png" width="300px" height="40px" value=""/>
+</div>
+
+
+
+<div style="position: absolute; top:57px; left:10px" >
+<form> 
+	<input type="text" class="searchBox2" name="no" id="no"/>
+</form> 
+</div>
+
+
+<div style="position: absolute; left:80px; right:0px; top:13px; color:white " >
+<label id="Tittle"><font size="4" >Call Recieving Options</font></label>
+</div>
+
+
+
+<div style="position: absolute; left:5px; right:0px; top:125px ">
+<input  class="submit4" type="submit" name="AcceptBtn" value="" onclick="sendResponse('Accept')"  />
+</div>
+
+<div style="position: absolute; left:52px; right:0px; top:140px ">
+<label id="Tittle"><font size="2" color="white">Accept</font></label>
+</div>
+
+
+
+<div  style="position: absolute; left:160px; right:0px; top:125px ">
+<input class="submit5" type="submit" alt="reject"  name="RejectBtn" value="" onclick="sendResponse('Reject')" />
+</div>
+
+
+<div style="position: absolute; left:195px; right:0px; top:140px ">
+<label id="Tittle"><font size="2" color="white">Reject</font></label>
+</div>
+
+
+
+<div  style="position: absolute; left:5px; right:0px; top:200px ">
+<input class="submit6" type="submit"  name="DeleteContact" value="" onclick="sendResponse('VM')" />
+</div>
+
+<div style="position: absolute; left:40px; right:0px; top:215px ">
+<label id="Tittle"><font size="2" color="white">Reject and Divert <br>to Voice Mail</font> </label>
+</div>
+
+
+
+<div  style="position: absolute; left:160px; right:0px; top:200px ">
+<input class="submit6" type="submit"  name="DeleteContact" value="" onclick="callBack()"/>
+</div>
+
+
+<div style="position: absolute; left:208px; right:0px; top:215px ">
+<label id="Tittle"><font size="2" color="white">Reject & <br>Call Back</font></label>
+</div>
+
+
+<div  style="position: absolute; left:5px; right:0px; top:280px ">
+<input class="submit6" type="submit"  name="DeleteContact" value="" />
+</div>
+
+<div style="position: absolute; left:40px; right:0px; top:300px ">
+<label id="Tittle"><font size="2" color="white">Reject & Divert<br> to Operator</font></label>
+</div>
+
+<div  style="position: absolute; left:160px; right:0px; top:280px ">
+<input class="submit6" type="submit"  name="DeleteContact" value="" onclick="sendResponse('FWDOP')" />
+</div>
+
+<div style="position: absolute; left:218px; right:0px; top:310px ">
+<label id="Tittle"><font size="2" color="white">Block</font></label>
+</div>
+
+
+
+
+
+
+
+<!----------------------Drop Down Bar Code ------------------------------->
+
+
+
+<div style="position: absolute; left:-5px;  top:92% " id="hide2"> 
+
+<input type="submit" class="footer1" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A');" />
+
+</div>
+
+
+
+<!--<div style="position: absolute; left:0px;  top:10px " > <!--  Big Div here  -->
+
+
+<div style="position: absolute; left:-5px;  top:65%; display:none; z-index:2 " id="hide1" > 
+
+
+<input type="submit" class="footer2" name="hideandshow" value="" onclick="if (document.getElementById('id1A').style.display=='none') show_menu2('id1A'); else hide_menu2('id1A'); if (document.getElementById('id2A').style.display=='none') show_menu2('id2A'); else hide_menu2('id2A'); if (document.getElementById('id3A').style.display=='none') show_menu2('id3A'); else hide_menu2('id3A'); if (document.getElementById('id4A').style.display=='none') show_menu2('id4A'); else hide_menu2('id4A'); if (document.getElementById('id5A').style.display=='none') show_menu2('id5A'); else hide_menu2('id5A'); if (document.getElementById('id6A').style.display=='none') show_menu2('id6A'); else hide_menu2('id6A'); if (document.getElementById('id7A').style.display=='none') show_menu2('id7A'); else hide_menu2('id7A'); " />
+
+
+</div>
+
+
+
+<div style="position: absolute; left:0px; right:0px; top:72%; display:none; z-index:2 " id="id3A" >
+<input type="submit" class="testbutton1" name="Dialer" value="Dialer" onclick="dialer()"  style = " text-align:center"/>
+</div>
+
+
+
+
+<div style="position: absolute; left:107px; right:0px; top:72%; display:none; z-index:2 " id="id4A" >
+
+<input type="submit" class="testbutton2" name="Contacts" value="Contacts" onclick="opencontact()" style = " text-align:center" />
+
+</div>
+
+
+
+<div style="position: absolute; left:214px; right:0px; top:72%; display:none; z-index:2 " id="id5A" >
+
+<input type="submit" class="testbutton3" name="Groups" value="Groups"  onclick="opengroups()" style = "text-align:center" />
+
+</div>
+
+<div style="position: absolute; left:0px; right:0px; top:81%; display:none"  id="id6A" >
+
+<input type="submit" class="testbutton4" name="SMS" value="SMS" size="1"  onclick="opensms()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:107px; right:0px; top:81%; display:none; z-index:2 " id="id7A" >
+
+<input type="submit" class="testbutton5" name="Calllog" value="Call Log" size="1" onclick="opencalllog()" style = " text-align:center"/>
+
+</div>
+
+<div style="position: absolute; left:214px; right:0px; top:81%; display:none; z-index:2 " id="id1A" >
+
+<input type="submit" class="testbutton6" name="Block" value="Block" size="1" onclick="openblock()" style = " text-align:center" />
+
+</div>
+
+
+<div style="position: absolute; left:0px; right:0px; top:90%; display:none" id="id2A"  >
+ <input type ="submit" class = "testbutton" name = "Settings" value = "Settings" onclick="opensetting()" style = " text-align:center" "/> 
+
+</div>
+
+
+<!--</div> <!-- Big Div End here -->
+
+
+
+
+</body>
+</html> 
